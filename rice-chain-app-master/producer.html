@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<title>Producer dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item ">Rice Chain</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img src="images/producer.jpg" class="w3-circle w3-margin-right" style="width:46px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span>Welcome, <strong>Producer</strong></span><br>
+      <span>Producer Id, <strong><span id="pid"></span></strong></span>
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container w3-blue">
+    <h5>Producer Dashboard</h5>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+    <a href="#personal-info" class="w3-bar-item w3-button w3-padding "> Add Personal Information</a>
+    <a href="#see-commodity" class="w3-bar-item w3-button w3-padding"> See all Commodity you own</a>
+    <a href="#see-participant" class="w3-bar-item w3-button w3-padding"> See all Distributors</a>
+    <a href="#sell-commodity" class="w3-bar-item w3-button w3-padding"> Sell a Commodity</a>
+    <a href="#see-transcation" class="w3-bar-item w3-button w3-padding"> See your transactions</a>
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="fa fa-dashboard"></i> Producer Dashboard</b></h5>
+  </header>
+
+<!--Add personal info-->
+  <div class="w3-panel" id="personal-info">
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div>
+        <h5><strong> Personal Information</strong></h5>
+            <div class="w3-container" >
+                <div class="w3-section">
+                <label> First Name</label>
+                <input class="w3-input w3-border w3-hover-border-black" style="width:50%;" type="text" name="fname" id="fname" required>
+                </div>
+                <div class="w3-section">
+                <label> Last Name</label>
+                <input class="w3-input w3-border w3-hover-border-black" style="width:50%;" type="text" name="lname" id="lname" required>
+                </div>
+                <div class="w3-section">
+                <input class="w3-input w3-border w3-hover-border-black" style="width:50%;" type="hidden" name="participanttype" id="participanttype" value="PRODUCERS" required>
+                </div>
+                <div class="w3-section">
+                <label>Country</label>
+                <input class="w3-input w3-border w3-hover-border-black" style="width:50%;" type="text" name="country" id="country" value= "INDIA" required>
+                </div>
+                <div class="w3-section">
+                <label>State</label>
+                <input class="w3-input w3-border w3-hover-border-black" style="width:50%;" type="text" name="state" id="state" value="TAMIL NADU" required>
+                </div>
+                <div class="w3-section">
+                <label>City</label>
+                <input class="w3-input w3-border w3-hover-border-black" style="width:50%;" type="text" name="city" id="city" value="CHENNAI" required>
+                </div>
+                <div class="w3-section">
+                <label>Area</label>
+                <input class="w3-input w3-border w3-hover-border-black" style="width:50%;" type="text" name="street" id="street" value="AVADI" required>
+                </div>
+                <div class="w3-section">
+                <label>Pincode</label>
+                <input class="w3-input w3-border w3-hover-border-black" style="width:50%;" type="number" name="pincode" id="pincode" value="600055" required>
+                </div>
+                <button type="submit" class="w3-button w3-block w3-black" style="width:50%;" onclick="addParticipant()">Submit</button>
+              </div>
+
+        </div>
+      </div>
+    </div>
+
+   
+   
+        
+    <!--see commodity-->
+    <div class="w3-panel" id="see-commodity">
+        <div class="w3-row-padding" style="margin:0 -16px">
+            <div>
+                <h5><strong> See All Commodity You Own</strong></h5>
+                <div class="w3-container">
+                    <button type="submit" class="w3-button w3-block w3-black" style="width:25%;" onclick="seeCommodity()" >See</button>
+                    <div>
+                    <div id="display-commodity"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--see participant-->
+    <div class="w3-panel" id="see-participant">
+            <div class="w3-row-padding" style="margin:0 -16px">
+                <div>
+                    <h5><strong> See All Distributors</strong></h5>
+                    <div class="w3-container">
+                        <button type="submit" class="w3-button w3-block w3-black" style="width:25%;" onclick="seeDistributors()">See</button>
+                        <div><div id="display-participant"></div></div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+       <!--sell commodity-->
+
+       <div class="w3-panel" id="sell-commodity">
+        <div class="w3-row-padding" style="margin:0 -16px">
+            <div>
+                <h5><strong>Sell Commodity</strong></h5>
+                    <div class="w3-container" >
+                      <button type="submit" class="w3-button w3-block w3-black" style="width: 50%;" onclick="renderSellCommodity()">Sell Commodity</button>
+                        <div id ="renderDropdowns"></div>
+                        <div class="w3-section">
+                          <label>Total Amount(Rs)</label>
+                          <input class="w3-input w3-border w3-hover-border-black" style="width:50%;" type="number" name="totalAmount" id="totalAmount" required>
+                        </div>
+                        <button type="submit" class="w3-button w3-block w3-black" style="width:50%;" onclick="sellCommodity()">Submit</button>
+                      </div>
+                    
+        </div>
+    </div>
+</div>
+
+
+     <!--see transaction-->
+     <div class="w3-panel" id="see-transcation">
+            <div class="w3-row-padding" style="margin:0 -16px">
+                <div>
+                    <h5><strong> See All Transactions</strong></h5>
+                    <div class="w3-container">
+                        <button type="submit" class="w3-button w3-block w3-black" style="width:25%;" onclick="seeTransaction()">See</button>
+                        <div><div id="display-transaction"></div></div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+</div>
+
+  
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+    <h4>FOOTER</h4>
+    <p>Powered by Rice Chain</p>
+  </footer>
+
+  <!-- End page content -->
+</div>
+
+<script>
+localStorage.setItem("participant" , 2);
+document.getElementById("pid").innerHTML = localStorage.getItem("aadharId")
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="javascript/addParticipant.js"></script>
+<script type="text/javascript" src="javascript/addCommodity.js"></script>
+<script type="text/javascript" src="javascript/seeCommodity.js"></script>
+<script type="text/javascript" src="javascript/seeDistributors.js"></script>
+<script type="text/javascript" src="javascript/seeTranscation.js"></script>
+<script type="text/javascript" src="javascript/sellCommodity.js"></script>
+<script type="text/javascript" src="javascript/renderSellCommodity.js"></script>
+</body>
+</html>
