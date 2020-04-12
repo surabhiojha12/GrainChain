@@ -1,0 +1,93 @@
+/** Sample queries for Commodity Trading business network
+*/
+
+query selectCommodities {
+  description: "Select all commodities"
+  statement:
+      SELECT org.example.mynetwork.Commodity
+}
+
+query selectCommoditiesByTradingSymbol {
+  description: "Select all commodities based on their main tradingSymbol"
+  statement:
+      SELECT org.example.mynetwork.Commodity
+          WHERE (tradingSymbol ==_$tradingSymbol)
+}
+
+query selectCommoditiesByOwner {
+  description: "Select all commodities based on their owner"
+  statement:
+      SELECT org.example.mynetwork.Commodity
+          WHERE (owner == _$owner)
+}
+
+query selectCommoditiesByOwnerAndByTradingSymbol {
+  description: "Select commodities based on owner and tradingSymbol"
+  statement:
+      SELECT org.example.mynetwork.Commodity
+          WHERE (owner == _$owner AND tradingSymbol ==_$tradingSymbol)
+}
+
+query selectTransactions {
+  description: "Select all transcations"
+  statement:
+      SELECT org.example.mynetwork.Trade
+}
+
+
+query selectTransactionsByCommodity {
+  description: "Select transcation based on commodity"
+  statement:
+      SELECT org.example.mynetwork.Trade
+          WHERE (commodity == _$commodity)
+}
+
+query selectTransactionsByIssuer {
+  description: "Select transcation based on commodity"
+  statement:
+      SELECT org.example.mynetwork.Trade
+          WHERE (issuer == _$issuer)
+}
+
+query selectTransactionsByNewOwner {
+  description: "Select transcation based on commodity"
+  statement:
+      SELECT org.example.mynetwork.Trade
+          WHERE (newOwner == _$newOwner)
+}
+
+query selectTransactionsByNewOwnerAndIssuer {
+  description: "Select transcation based on trader either as issuer of newOwner"
+  statement:
+      SELECT org.example.mynetwork.Trade
+          WHERE (newOwner == _$trader OR issuer == _$trader )
+}
+
+query selectProducersParticipant{
+  description: "Selects all the Producers participant"
+  statement:
+    SELECT org.example.mynetwork.Trader
+        WHERE (participantType == "PRODUCERS") 
+}
+
+query selectDistributorsParticipant{
+  description: "Selects all the Distributors participant"
+  statement:
+    SELECT org.example.mynetwork.Trader
+        WHERE (participantType == "DISTRIBUTORS") 
+}
+
+query selectRetailersParticipant{
+  description: "Selects all the Retailers participant"
+  statement:
+    SELECT org.example.mynetwork.Trader
+        WHERE (participantType == "RETAILERS") 
+}
+
+query selectFarmersParticipant{
+  description: "Selects all the Producers participant"
+  statement:
+    SELECT org.example.mynetwork.Trader
+        WHERE (participantType == "FARMERS") 
+}
+
